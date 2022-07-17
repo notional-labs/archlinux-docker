@@ -6,7 +6,7 @@ FROM ghcr.io/notional-labs/archlinux
 ENV GOPATH=/go
 
 # everything needed for cosmos development
-RUN pacman -Syyu --noconfirm go base-devel git leveldb rocksdb make python snappy lz4 git-lfs jq wget curl protobuf yarn rustup npm
+RUN pacman -Syyu --noconfirm go base-devel git leveldb rocksdb make python snappy lz4 git-lfs jq wget curl protobuf yarn rustup npm unzip
 
 # Useful tools
 RUN go install mvdan.cc/gofumpt@latest && \

@@ -6,10 +6,19 @@ FROM ghcr.io/notional-labs/archlinux
 ENV GOPATH=/go
 
 # everything needed for cosmos development
-RUN pacman -Syyu --noconfirm go base-devel git leveldb rocksdb make python snappy lz4 git-lfs jq wget curl protobuf yarn rustup npm unzip
+RUN pacman -Syyu --noconfirm go base-devel git leveldb rocksdb make python snappy lz4 git-lfs jq wget curl protobuf yarn rustup npm unzip docker
+RUN systemctl enable docker
 
 # Useful tools
+# concept: we want every tool frequently used when building in cosmos.
 RUN go install mvdan.cc/gofumpt@latest && \
+      go install github.com/cweill/gotests/gotests@latest && \
+      go install github.com/fatih/gomodifytags@latest && \
+      go install github.com/josharian/impl@latest && \
+      go install github.com/haya14busa/goplay/cmd/goplay@latest && \
+      go install github.com/go-delve/delve/cmd/dlv@latest && \
+      go install honnef.co/go/tools/cmd/staticcheck@latest && \
+      go install golang.org/x/tools/gopls@latest && \
       go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest && \
       go install github.com/bufbuild/buf/cmd/buf@latest &&\
       go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \

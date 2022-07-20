@@ -24,7 +24,11 @@ RUN go install mvdan.cc/gofumpt@latest && \
       go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest && \
       go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@v1.16.0 && \
       go install github.com/cosmos/cosmos-proto/cmd/protoc-gen-go-pulsar@latest && \
-      git clone https://github.com/cosmos/cosmos-proto && \
+      go install honnef.co/go/tools/cmd/staticcheck@latest
+      
+
+# Install slightly more complicated but still useful tools
+RUN git clone https://github.com/cosmos/cosmos-proto && \
       cd cosmos-proto && \
       go install ./... && \ 
       cp /go/bin/* /usr/bin && \

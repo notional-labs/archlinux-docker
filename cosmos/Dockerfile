@@ -7,7 +7,6 @@ ENV GOPATH=/go
 
 # everything needed for cosmos development
 RUN pacman -Syyu --noconfirm go base-devel git leveldb rocksdb make python snappy lz4 git-lfs jq wget curl protobuf yarn rustup npm unzip docker
-RUN systemctl enable docker
 
 # Useful tools
 # concept: we want every tool frequently used when building in cosmos.

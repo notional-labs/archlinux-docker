@@ -13,7 +13,7 @@ ADD $ARCHDIR/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist
 COPY pacstrap-docker /archlinux/
 
 RUN ./pacstrap-docker /archlinux/rootfs \
-	    bash sed gzip pacman && \
+	    archlinux-keyring bash sed gzip pacman && \
     # Remove current pacman database, likely outdated very soon
     rm rootfs/var/lib/pacman/sync/*
 

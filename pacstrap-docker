@@ -23,10 +23,7 @@ echo 'Creating /dev/null in new root'
 mknod "$newroot/dev/null" c 1 3
 
 echo 'Installing packages to %s' "$newroot"
-if ! pacman -r "$newroot" -Sy --noconfirm  archlinux-keyring; then
-	die 'Failed to install keyring to new root'
-fi
-if ! pacman -r "$newroot" -Sy --noconfirm "${pacman_args[@]}"; then
+if ! pacman -r "$newroot" -Sy --noconfirm "base base-devel archlinux-keyring"; then
 	die 'Failed to install packages to new root'
 fi
 

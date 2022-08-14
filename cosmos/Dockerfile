@@ -6,7 +6,8 @@ FROM ghcr.io/notional-labs/archlinux
 ENV GOPATH=/go
 
 # everything needed for cosmos development
-RUN pacman -Syyu --noconfirm go base-devel git leveldb rocksdb make python snappy lz4 git-lfs jq wget curl protobuf yarn rustup npm unzip docker
+RUN pacman -Syyu --noconfirm go base-devel git leveldb rocksdb make python snappy git-lfs jq wget curl protobuf yarn rustup npm unzip docker
+
 
 # Useful tools
 # concept: we want every tool frequently used when building in cosmos.
@@ -32,6 +33,9 @@ RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/instal
 
 
 RUN brew install bufbuild/buf/buf
+
+
+RUN rustup toolchain install stable
 
       
 

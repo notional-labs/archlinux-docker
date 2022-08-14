@@ -28,6 +28,11 @@ RUN go install mvdan.cc/gofumpt@latest && \
       
       
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  
+
+
+
+RUN brew install bufbuild/buf/buf
+
       
 
 # Install slightly more complicated but still useful tools

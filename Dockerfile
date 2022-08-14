@@ -20,7 +20,7 @@ mkdir -m 0755 -p /archlinux/rootfs/var/{cache/pacman/pkg,lib/pacman,log} /archli
 mkdir -m 1777 -p /archlinux/rootfs/tmp && \
 mkdir -m 0555 -p /archlinux/rootfs/{sys,proc} && \
 mknod /archlinux/rootfs/dev/null c 1 3 && \
-pacman -r /archlinux/rootfs -Sy --noconfirm archlinux-keyring bash sed gzip pacman && \
+pacman -r /archlinux/rootfs -Sy --noconfirm bash sed gzip pacman && \
 rm "/archlinux/rootfs/dev/null"
 
 RUN rm rootfs/var/lib/pacman/sync/*

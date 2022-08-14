@@ -1,5 +1,5 @@
 ARG ARCH=amd64
-FROM ghcr.io/faddat/archlinux-$ARCH
+FROM ghcr.io/notional-labs/archlinux-$ARCH
 
 ARG ARCHDIR="rootfs/amd64"
 
@@ -10,12 +10,15 @@ RUN mkdir -p /archlinux/rootfs
 ADD $ARCHDIR/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist
 
 
-COPY pacstrap-docker /archlinux/
+RUN echo 'Creating install root at %s' "$newroot" && \
+mkdir -m 0755 -p /archlinux/rootfs/var/{cache/pacman/pkg,lib/pacman,log} /archlinux/rootfs/{dev,run,etc} && \
+mkdir -m 1777 -p /archlinux/rootfs/tmp && \
+mkdir -m 0555 -p /archlinux/rootfs/{sys,proc} && \
+mknod /archlinux/rootfs/dev/null c 1 3 && \
+pacman -r /archlinux/rootfs -Sy --noconfirm archlinux-keyring bash sed gzip pacman && \
+rm "/archlinux/rootfs/dev/null"
 
-RUN ./pacstrap-docker /archlinux/rootfs \
-	    archlinux-keyring bash sed gzip pacman && \
-    # Remove current pacman database, likely outdated very soon
-    rm rootfs/var/lib/pacman/sync/*
+RUN rm rootfs/var/lib/pacman/sync/*
 
 FROM scratch
 ARG ARCH=amd64

@@ -19,12 +19,15 @@ RUN go install mvdan.cc/gofumpt@latest && \
       go install honnef.co/go/tools/cmd/staticcheck@latest && \
       go install golang.org/x/tools/gopls@latest && \
       go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest && \
-      go install github.com/bufbuild/buf/cmd/buf@latest &&\
       go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
       go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest && \
       go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@v1.16.0 && \
       go install github.com/cosmos/cosmos-proto/cmd/protoc-gen-go-pulsar@latest && \
       go install honnef.co/go/tools/cmd/staticcheck@latest
+      
+      
+      
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  
       
 
 # Install slightly more complicated but still useful tools

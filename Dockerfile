@@ -17,6 +17,7 @@ mkdir -m 1777 -p /archlinux/rootfs/tmp && \
 mkdir -m 0555 -p /archlinux/rootfs/{sys,proc} && \
 mknod /archlinux/rootfs/dev/null c 1 3 && \
 pacman -r /archlinux/rootfs -Sy --noconfirm bash sed gzip pacman && \
+pacman -r /archlinux/rootfs -Syyu --noconfirm archlinux-keyring
 rm "/archlinux/rootfs/dev/null"
 
 RUN rm rootfs/var/lib/pacman/sync/*
@@ -32,6 +33,8 @@ ENV LANG=en_US.UTF-8
 
 RUN locale-gen && \
     pacman-key --init && \
-    (pacman-key --populate archlinux || pacman-key --populate archlinuxarm)
+    
+    
+RUN [[ "$(uname -m)" == "x86_64" ]] && pacman-key --populate archlinux || pacman-key --populate archlinuxarm
 
 CMD ["/usr/bin/bash"]

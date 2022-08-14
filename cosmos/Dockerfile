@@ -30,7 +30,7 @@ RUN go install mvdan.cc/gofumpt@latest && \
       go install honnef.co/go/tools/cmd/staticcheck@latest
       
       
-RUN if $(uname -m) = x86_64 if [ "$VAR1" = "$VAR2" ]; then \
+RUN if $(uname -m) = "x86_64" ; then \
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  && brew install bufbuild/buf/buf  \
 else \
     echo "ARM cpu, skipping homebrew and buf." \

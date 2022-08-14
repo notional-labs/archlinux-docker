@@ -7,7 +7,7 @@ WORKDIR /archlinux
 
 RUN mkdir -p /archlinux/rootfs
 # Pacstrap uses the existing mirrorlist, need to update early
-RUN echo "Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch" > /etc/pacman.d/mirrorlist
+RUN echo 'Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 
 
 RUN echo 'Creating install root at %s' "$newroot" && \

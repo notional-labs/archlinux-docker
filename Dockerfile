@@ -8,10 +8,10 @@ WORKDIR /archlinux
 RUN mkdir -p /archlinux/rootfs
 # Pacstrap uses the existing mirrorlist, need to update early
 
-RUN if [ $(uname -m) = "x86_64" ] ; then \
-  echo 'Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/mirrorlist \
+RUN if [ "$(uname -m)" == "x86_64" ] ; then \
+echo 'Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/mirrorlist \
 else \
-   echo 'Server = http://mirror.archlinuxarm.org/$arch/$repo' > /etc/pacman.d/mirrorlist \
+echo 'Server = http://mirror.archlinuxarm.org/$arch/$repo' > /etc/pacman.d/mirrorlist \
 fi
 
 

@@ -32,8 +32,7 @@ COPY rootfs/$ARCH/ /
 ENV LANG=en_US.UTF-8
 
 RUN locale-gen && \
-    pacman-key --init && \
-    
+    pacman-key --init 
     
 RUN [[ "$(uname -m)" == "x86_64" ]] && pacman-key --populate archlinux || pacman-key --populate archlinuxarm
 

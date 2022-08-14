@@ -29,14 +29,10 @@ RUN go install mvdan.cc/gofumpt@latest && \
       go install github.com/cosmos/cosmos-proto/cmd/protoc-gen-go-pulsar@latest && \
       go install honnef.co/go/tools/cmd/staticcheck@latest
       
+
+RUN [[ "$(uname -m)" == "x86_64" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  && brew install bufbuild/buf/buf  || echo "ARM cpu, skipping homebrew and buf."
+
       
-RUN if $(uname -m) = "x86_64" ; then \
-   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  && brew install bufbuild/buf/buf  \
-else \
-    echo "ARM cpu, skipping homebrew and buf." \
-fi 
-
-
 RUN rustup toolchain install stable
 
 # Install slightly more complicated but still useful tools

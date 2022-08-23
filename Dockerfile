@@ -33,6 +33,6 @@ ENV LANG=en_US.UTF-8
 RUN locale-gen && \
     pacman-key --init 
     
-RUN if [ "$ARCH" == "amd64" ] ; then pacman-key --populate archlinux ; else pacman-key --populate archlinuxarm ; fi
+RUN pacman-key --populate archlinux manjaro
 
 CMD ["/usr/bin/bash"]

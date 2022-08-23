@@ -10,7 +10,7 @@ RUN mkdir -p /archlinux/rootfs
 
 # RUN [[ "$(uname -m)" == "x86_64" ]] && echo 'Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/mirrorlist || echo 'Server = http://mirror.archlinuxarm.org/$arch/$repo' > /etc/pacman.d/mirrorlist
 
-RUN echo 'Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/mirrorlist 
+RUN if [ "$ARCH" = "amd64" ] ; then echo 'Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/mirrorlist ; else echo 'Server = http://mirror.archlinuxarm.org/$arch/$repo' > /etc/pacman.d/mirrorlist ; fi
 
 RUN echo 'Creating install root at %s' "$newroot" && \
 mkdir -m 0755 -p /archlinux/rootfs/var/{cache/pacman/pkg,lib/pacman,log} /archlinux/rootfs/{dev,run,etc} && \
@@ -35,6 +35,6 @@ ENV LANG=en_US.UTF-8
 RUN locale-gen && \
     pacman-key --init 
     
-RUN [[ "$(uname -m)" == "x86_64" ]] && pacman-key --populate archlinux || pacman-key --populate archlinuxarm
+RUN if [ "$ARCH" == "amd64" ] ; then pacman-key --populate archlinux ; else pacman-key --populate archlinuxarm ; fi
 
 CMD ["/usr/bin/bash"]

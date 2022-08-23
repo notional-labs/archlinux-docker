@@ -1,9 +1,0 @@
-#!/bin/bash -ex
-
-DOCKER_ARCH=${BUILD_ARCH:-amd64}
-DOCKER_ORG=ghcr.io/notional-labs
-DOCKER_IMAGE=archlinux-${DOCKER_ARCH}
-
-docker push $DOCKER_ORG/$DOCKER_IMAGE
-
-

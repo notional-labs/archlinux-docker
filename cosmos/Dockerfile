@@ -3,8 +3,7 @@
 FROM manjarolinux/base
 
 ENV GOPATH=/go
-ENV PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
-
+ENV PATH=$PATH:/go/bin
 
 # everything needed for cosmos development
 RUN pacman -Syyu --noconfirm go base-devel git leveldb rocksdb make python snappy git-lfs jq wget curl protobuf yarn rustup npm unzip docker

@@ -1,12 +1,10 @@
 # This dockerfile will be used to bootstrap the docker changes for the cosmos SDK, and will be built hourly.
-# We'll also move faddat/archlinux to an hourly schedule, ensuring that when the images are put to use, they dont' need to update as many packages.
 
-FROM ghcr.io/notional-labs/archlinux
+FROM manjarolinux/base
 
 ENV GOPATH=/go
 ENV PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 
-RUN pacman -Sy archlinux-keyring --noconfirm
 
 # everything needed for cosmos development
 RUN pacman -Syyu --noconfirm go base-devel git leveldb rocksdb make python snappy git-lfs jq wget curl protobuf yarn rustup npm unzip docker
@@ -27,12 +25,10 @@ RUN go install mvdan.cc/gofumpt@latest && \
       go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest && \
       go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@v1.16.0 && \
       go install github.com/cosmos/cosmos-proto/cmd/protoc-gen-go-pulsar@latest && \
-      go install honnef.co/go/tools/cmd/staticcheck@latest
+      go install honnef.co/go/tools/cmd/staticcheck@latest && \
+      go install github.com/bufbuild/buf/cmd/buf@latest
       
 
-RUN [[ "$(uname -m)" == "x86_64" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  && brew install bufbuild/buf/buf  || echo "ARM cpu, skipping homebrew and buf."
-
-      
 RUN rustup toolchain install stable
 
 # Install slightly more complicated but still useful tools

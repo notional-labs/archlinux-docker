@@ -10,69 +10,6 @@ on:
   
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        build-arch:
-          - amd64
-          - arm64v8
-    env:
-      BUILD_ARCH: ${{ matrix.build-arch }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        
-      - name: Set up QEMU
-        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes --credential yes
-        
-      - name: Build
-        run: ./build
-        
-      - name: Login to DockerHub
-        uses: docker/login-action@v1.8.0
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-      -
-        name: Login to GitHub Container Registry
-        uses: docker/login-action@v1 
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Push
-        run: ./push
-        
-        
-        
-  create-manifest:
-    runs-on: ubuntu-latest
-    needs: build
-    env:
-      DOCKER_CLI_EXPERIMENTAL: enabled
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        
-      - name: Login to DockerHub
-        uses: docker/login-action@v1.8.0
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-      -
-        name: Login to GitHub Container Registry
-        uses: docker/login-action@v1 
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Create manifest
-        run: ./create-manifest
         
   cosmos:
     runs-on: ubuntu-latest

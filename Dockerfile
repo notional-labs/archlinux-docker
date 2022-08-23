@@ -1,6 +1,6 @@
 ARG ARCH=amd64
 FROM ghcr.io/notional-labs/archlinux-$ARCH
-ENV ARCHr=$ARCH
+ENV ARCH $ARCH
 
 ARG ARCHDIR="rootfs/amd64"
 

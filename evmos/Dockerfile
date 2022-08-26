@@ -1,6 +1,6 @@
 FROM manjarolinux/base
 
-RUN pacman -Syyu --noconfirm go base-devel git wget
+RUN pacman -Syyu --noconfirm go base-devel git wget jq
 
 RUN wget https://archive.evmos.org/mainnet/genesis.json
 

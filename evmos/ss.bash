@@ -3,7 +3,7 @@
 # Pebbledb state sync script.
 set -uxe
 
-git clone https://github.com/evmos/evmos --branch release/v7.0x
+git clone https://github.com/evmos/evmos --branch release/v7.0.x
 cd evmos
 
 # Set Golang environment variables.

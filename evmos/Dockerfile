@@ -1,11 +1,9 @@
-FROM ghcr.io/notional-labs/cosmos
+FROM manjarolinux/base
 
-COPY . .
+RUN pacman -Syyu --noconfirm go base-devel git wget
 
-ENV GOPATH=/GO
-RUN pacman -Syyu --noconfirm unzip
-RUN git clone https://github.com/notional-labs/evmos --branch dangerously-fast
-RUN wget -q -O /evmos/genesis.json https://github.com/tharsis/mainnet/raw/main/evmos_9001-2/genesis.json.zip 
+RUN wget https://archive.evmos.org/mainnet/genesis.json
 
-CMD /bin/bash start.bash
+COPY ss.bash .
 
+EXPOSE 26656 26657 1317 9090 8545 8546

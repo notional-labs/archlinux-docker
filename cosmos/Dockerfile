@@ -8,6 +8,8 @@ ENV PATH=$PATH:/go/bin
 # everything needed for cosmos development
 RUN pacman -Syyu --noconfirm go base-devel git leveldb rocksdb make python snappy git-lfs jq wget curl protobuf yarn rustup npm unzip docker glibc
 
+#trigger ci in vain
+
 
 # Useful tools
 # concept: we want every tool frequently used when building in cosmos.
